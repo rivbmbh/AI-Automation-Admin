@@ -49,14 +49,14 @@ Route::get('/bar-chart', function () {
 })->name('bar-chart');
 
 
-// authentication pages
-Route::get('/signin', function () {
-    return view('pages.auth.signin', ['title' => 'Sign In']);
-})->name('signin');
+// // authentication pages
+// Route::get('/signin', function () {
+//     return view('pages.auth.signin', ['title' => 'Sign In']);
+// })->name('signin');
 
-Route::get('/signup', function () {
-    return view('pages.auth.signup', ['title' => 'Sign Up']);
-})->name('signup');
+// Route::get('/signup', function () {
+//     return view('pages.auth.signup', ['title' => 'Sign Up']);
+// })->name('signup');
 
 // ui elements pages
 Route::get('/alerts', function () {
