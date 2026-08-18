@@ -9,6 +9,7 @@
             <x-form.form-elements.text-area-inputs inputTitle="Description" inputName="description" />
             <x-form.form-elements.select-input inputTitle="Category" inputName="category" />
             <x-form.form-elements.number-input inputTitle="Price" inputName="price" />
+            <x-form.form-elements.number-input inputTitle="Stock" inputName="stock" />
         </div>
         
         {{-- submit buttons --}}

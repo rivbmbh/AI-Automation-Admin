@@ -10,9 +10,10 @@ Route::get('/', function () {
 })->name('dashboard');
 
 // product pages
-Route::get('/products', [ProductController::class, "index"])->name("products");
-Route::get('/add-product', [ProductController::class, "create"])->name("add-product");
-Route::get('/edit-product/{id}', [ProductController::class, "edit"])->name("edit-product");
+Route::resource('products', ProductController::class);
+// Route::get('/products', [ProductController::class, "index"])->name("products");
+// Route::get('/add-product', [ProductController::class, "create"])->name("add-product");
+// Route::get('/edit-product/{id}', [ProductController::class, "edit"])->name("edit-product");
 
 // calender pages
 Route::get('/calendar', function () {
