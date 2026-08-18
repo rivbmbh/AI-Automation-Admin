@@ -1,12 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+// use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
 
 // dashboard pages
 Route::get('/', function () {
     return view('pages.dashboard.ecommerce', ['title' => 'E-commerce Dashboard']);
 })->name('dashboard');
+
+// product pages
+Route::get('/products', [ProductController::class, "index"])->name("products");
+Route::get('/add-product', [ProductController::class, "create"])->name("add-product");
+Route::get('/edit-product/{id}', [ProductController::class, "edit"])->name("edit-product");
 
 // calender pages
 Route::get('/calendar', function () {

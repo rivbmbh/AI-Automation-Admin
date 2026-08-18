@@ -1,3 +1,7 @@
+@props([
+    'title',
+])
+
 <div x-data="{
     tableRowData: [
         {
@@ -103,7 +107,7 @@
         <div class="flex flex-col gap-4 px-6 mb-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-                    Recent Orders
+                    {{ $title }}
                 </h3>
             </div>
             <div class="flex items-center gap-3">

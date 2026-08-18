@@ -5,6 +5,7 @@
     'endIcon' => null,
     'className' => '',
     'disabled' => false,
+    'type' => 'button',
 ])
 
 @php
