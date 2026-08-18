@@ -14,13 +14,13 @@
             <option value="" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                 Select Option
             </option>
-            <option value="" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+            <option value="marketing" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                 Marketing
             </option>
-            <option value="" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+            <option value="template" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                 Template
             </option>
-            <option value="" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
+            <option value="development" class="text-gray-700 dark:bg-gray-900 dark:text-gray-400">
                 Development
             </option>
         </select>

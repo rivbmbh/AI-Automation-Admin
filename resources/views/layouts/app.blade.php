@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? 'Dashboard' }} | TailAdmin - Laravel Tailwind CSS Admin Dashboard Template</title>
-
+    @include('sweetalert2::index')
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

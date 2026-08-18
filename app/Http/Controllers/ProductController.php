@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use SweetAlert2\Laravel\Swal;
 
 class ProductController extends Controller
 {
@@ -28,7 +29,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
+            'price' => ['required', 'numeric', 'min:0'],
+            'stock' => ['required', 'integer', 'min:0'],
+        ]);
+            
+        Product::create($validated);
+
+        // Swal::fire([
+        //     'title' => 'Success',
+        //     'text' => 'Product created successfully.',
+        //     'icon' => 'success',
+        //     'toast' => true,
+        //     'position' => 'top-end',
+        //     'showConfirmButton' => false,
+        //     'timer' => 3000,
+        //     'timerProgressBar' => true,
+        // ]);
+        
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
     /**

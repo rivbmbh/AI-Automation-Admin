@@ -34,7 +34,7 @@
 @endphp
 
 <button
-    {{ $attributes->merge(['class' => $classes, 'type' => $attributes->get('type', 'button')]) }}
+    {{ $attributes->merge(['class' => $classes, 'type' => $type]) }}
     @if($disabled) disabled @endif
 >
     {{-- start icon: priority — named slot 'startIcon' first, then startIcon prop if it's a HtmlString --}}

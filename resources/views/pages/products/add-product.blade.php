@@ -2,7 +2,7 @@
 
 @section('content')
     <x-common.component-card title="Add Product">
-    <form action="" method="POST">
+    <form action="{{ route('products.store') }}" method="POST">
         @csrf
         <div class="space-y-6">
             <x-form.form-elements.text-input inputTitle="Product Name" inputName="name" />
