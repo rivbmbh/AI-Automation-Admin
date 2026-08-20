@@ -19,8 +19,8 @@ class MenuHelper
                 'name' => 'Products',
                 'subItems' => [
                     ['name' => 'Products List', 'path' => '/products', 'pro' => false],
-                    ['name' => 'Add Product', 'path' => '/products/create', 'pro' => false],
-                    ['name' => 'Edit Product', 'path' => '/products/{product}/edit', 'pro' => false],
+                    // ['name' => 'Add Product', 'path' => '/products/create', 'pro' => false],
+                    // ['name' => 'Edit Product', 'path' => '/products/{product}/edit', 'pro' => false],
                 ],
             ],
             [

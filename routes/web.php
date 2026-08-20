@@ -90,6 +90,14 @@ Route::get('/videos', function () {
     return view('pages.ui-elements.videos', ['title' => 'Videos']);
 })->name('videos');
 
+Route::get('/test-error-toast', function () {
+    return back()->withErrors([
+        'name'        => 'Nama produk wajib diisi.',
+        'description' => 'Deskripsi terlalu pendek.',
+        'price'       => 'Harga harus berupa angka.',
+        'stock'       => 'Stok tidak boleh negatif.',
+    ]);
+})->name('test-error-toast');
 
 
 

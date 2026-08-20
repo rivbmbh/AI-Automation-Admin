@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use SweetAlert2\Laravel\Swal;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class ProductController extends Controller
 {
@@ -13,51 +15,56 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.products.products-list');
+        $products = Product::latest()->paginate(10);
+
+        return view('pages.products.products-list', compact('products'));
     }
-        
-        /**
-         * Show the form for creating a new resource.
-        */
+
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('pages.products.add-product');
+        $categoriesDummy = [
+            'Elektronik',
+            'Fashion',
+            'Skincare',
+            'Toys',
+            'Household'
+        ];
+
+        return view('pages.products.add-product', compact('categoriesDummy'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'description' => ['nullable', 'string'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'stock' => ['required', 'integer', 'min:0'],
-        ]);
-            
-        Product::create($validated);
+        try {
+            DB::transaction(function () use ($request) {
+                Product::create($request->validated());
+            });
 
-        // Swal::fire([
-        //     'title' => 'Success',
-        //     'text' => 'Product created successfully.',
-        //     'icon' => 'success',
-        //     'toast' => true,
-        //     'position' => 'top-end',
-        //     'showConfirmButton' => false,
-        //     'timer' => 3000,
-        //     'timerProgressBar' => true,
-        // ]);
-        
-        return redirect()->route('products.index')->with('success', 'Product created successfully.');
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product created successfully.');
+        } catch (Throwable $e) {
+            Log::error('Failed to create product: ' . $e->getMessage());
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Failed to create product. Please try again.');
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        // return view('pages.products.show-product', compact('product'));
     }
 
     /**
@@ -65,15 +72,38 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('pages.products.edit-product', compact('product'));
+        $categoriesDummy = [
+            'Elektronik',
+            'Fashion',
+            'Skincare',
+            'Toys',
+            'Household'
+        ];
+
+        return view('pages.products.edit-product', compact('product', 'categoriesDummy'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        try {
+            DB::transaction(function () use ($request, $product) {
+                $product->update($request->validated());
+            });
+
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product updated successfully.');
+        } catch (Throwable $e) {
+            Log::error("Failed to update product {$product->id}: " . $e->getMessage());
+
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Failed to update product. Please try again.');
+        }
     }
 
     /**
@@ -81,6 +111,20 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        try {
+            DB::transaction(function () use ($product) {
+                $product->delete();
+            });
+
+            return redirect()
+                ->route('products.index')
+                ->with('success', 'Product deleted successfully.');
+        } catch (Throwable $e) {
+            Log::error("Failed to delete product {$product->id}: " . $e->getMessage());
+
+            return redirect()
+                ->route('products.index')
+                ->with('error', 'Failed to delete product. Please try again.');
+        }
     }
 }
