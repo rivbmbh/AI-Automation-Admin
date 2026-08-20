@@ -35,13 +35,13 @@
                     <tr>
                         <th class="px-6 py-3 font-medium text-gray-500 sm:px-6 text-theme-xs dark:text-gray-400 text-start">
                             <div class="flex items-center gap-3">
-                                <div @click="handleSelectAll()"
+                                {{-- <div @click="handleSelectAll()"
                                     class="flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border-[1.25px]"
                                     :class="selectAll ? 'border-blue-500 dark:border-blue-500 bg-blue-500' : 'bg-white dark:bg-white/0 border-gray-300 dark:border-gray-700'">
                                     <svg :class="selectAll ? 'block' : 'hidden'" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.6668 3.5L5.25016 9.91667L2.3335 7" stroke="white" stroke-width="1.94437" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </div>
+                                </div> --}}
                                 <span class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">No</span>
                             </div>
                         </th>
@@ -55,37 +55,33 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $no = 0;
-                        $no - 1
-                    @endphp
                     @foreach ($data as $value)    
                     <tr class="border-b border-gray-100 dark:border-white/5">
                         <td class="px-4 sm:px-6 py-3.5">
-                            <div class="flex items-center gap-3">
-                                <div @click="handleRowSelect(row.id)"
+                            <div class="flex items-center gap-3 text-gray-700 dark:text-gray-400">
+                                {{-- <div @click="handleRowSelect(row.id)"
                                     class="flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border-[1.25px]"
                                     :class="selectedRows.includes(row.id) ? 'border-blue-500 dark:border-blue-500 bg-blue-500' : 'bg-white dark:bg-white/0 border-gray-300 dark:border-gray-700'">
                                     <svg :class="selectedRows.includes(row.id) ? 'block' : 'hidden'" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.6668 3.5L5.25016 9.91667L2.3335 7" stroke="white" stroke-width="1.94437" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                </div>
+                                </div> --}}
                                 {{-- number --}}
-                               {{ $data->firstItem() + $loop->index }}
+                                {{ $data->firstItem() + $loop->index }}
                             </div>
                         </td>
-                        <td class="px-4 sm:px-6 py-3.5">
+                        <td class="px-4 sm:px-6 py-3.5 text-gray-700 dark:text-gray-400">
                             <div class="flex items-center gap-3">
                                 {{ $value->sku }}
                             </div>
                         </td>
-                        <td class="px-4 sm:px-6 py-3.5">
+                        <td class="px-4 sm:px-6 py-3.5 text-gray-700 dark:text-gray-400">
                             <div class="flex items-center gap-3">
                                 {{ $value->name }}
                             </div>
                         </td>
                         <td class="px-4 sm:px-6 py-3.5">
-                            <p class="text-gray-700 dark:text-gray-400">{{ $value->price }}</p>
+                            <p class="text-gray-700 dark:text-gray-400">Rp {{  number_format($value->price, 0, ',', '.') }}</p>
                         </td>
                         <td class="px-4 sm:px-6 py-3.5">
                             <p class="text-gray-700 dark:text-gray-400">{{ $value->stock }}</p>
